@@ -7,6 +7,7 @@ import niccolosciucco.u5_w1_d5.repositories.EdificioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -45,5 +46,13 @@ public class EdificioService {
 
     public Edificio findById(UUID id) {
         return this.edificioRepository.findById(id).orElseThrow(() -> new NotFoundException("Edificio con ID " + id + " non trovato"));
+    }
+
+    public List<Edificio> findAll() {
+        List<Edificio> edifici = this.edificioRepository.findAll();
+        if (edifici.isEmpty()) {
+            throw new NotFoundException("Non sono presenti edifici nel database.");
+        }
+        return edifici;
     }
 }

@@ -7,6 +7,7 @@ import niccolosciucco.u5_w1_d5.repositories.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -45,5 +46,13 @@ public class UtenteService {
 
     public Utente findById(UUID id) {
         return this.utenteRepository.findById(id).orElseThrow(() -> new NotFoundException("Utente con ID " + id + " non trovato"));
+    }
+
+    public List<Utente> findAll() {
+        List<Utente> utenti = this.utenteRepository.findAll();
+        if (utenti.isEmpty()) {
+            throw new NotFoundException("Non sono presenti utenti nel database.");
+        }
+        return utenti;
     }
 }

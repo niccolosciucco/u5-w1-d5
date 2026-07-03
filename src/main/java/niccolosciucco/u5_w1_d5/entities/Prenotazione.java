@@ -3,6 +3,7 @@ package niccolosciucco.u5_w1_d5.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Table(name = "prenotazioni")
 @NoArgsConstructor
 @Getter
+@ToString
 public class Prenotazione {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

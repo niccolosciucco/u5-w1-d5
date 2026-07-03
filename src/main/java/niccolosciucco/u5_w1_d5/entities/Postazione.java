@@ -3,6 +3,7 @@ package niccolosciucco.u5_w1_d5.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import niccolosciucco.u5_w1_d5.enums.TipoPostazione;
 
 import java.util.UUID;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Table(name = "postazioni")
 @NoArgsConstructor
 @Getter
+@ToString
 public class Postazione {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
