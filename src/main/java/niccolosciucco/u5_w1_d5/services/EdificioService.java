@@ -7,6 +7,9 @@ import niccolosciucco.u5_w1_d5.repositories.EdificioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class EdificioService {
     private final EdificioRepository edificioRepository;
@@ -39,5 +42,12 @@ public class EdificioService {
 
         this.edificioRepository.save(edificio);
         System.out.println("Edificio '" + edificio.getNome() + "' salvato con successo!");
+    }
+
+    public Optional<Edificio> findById(UUID id) {
+        if (id == null) {
+            throw new EmptyAttribute("L'ID dell'edificio è nullo");
+        }
+        return this.edificioRepository.findById(id);
     }
 }
