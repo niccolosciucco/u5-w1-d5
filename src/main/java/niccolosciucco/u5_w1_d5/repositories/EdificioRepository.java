@@ -8,5 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface EdificioRepository extends JpaRepository<Edificio, UUID> {
-    boolean existsByNomeAndCitta(String nome, String citta, String indirizzo);
+    boolean existsByNomeAndCittaAndIndirizzo(String nome, String citta, String indirizzo);
 }

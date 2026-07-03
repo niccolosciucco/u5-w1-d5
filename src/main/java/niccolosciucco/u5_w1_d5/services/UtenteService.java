@@ -7,7 +7,6 @@ import niccolosciucco.u5_w1_d5.repositories.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -44,10 +43,7 @@ public class UtenteService {
         System.out.println("Utente con username '" + utente.getUsername() + "' salvato con successo!");
     }
 
-    public Optional<Utente> findById(UUID id) {
-        if (id == null) {
-            throw new EmptyAttribute("L'ID dell'utente è nullo");
-        }
-        return this.utenteRepository.findById(id);
+    public Utente findById(UUID id) {
+        return this.utenteRepository.findById(id).orElseThrow(() -> new NotFoundException("Utente con ID " + id + " non trovato"));
     }
 }

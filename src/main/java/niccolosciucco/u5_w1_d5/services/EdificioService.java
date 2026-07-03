@@ -7,7 +7,6 @@ import niccolosciucco.u5_w1_d5.repositories.EdificioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -34,7 +33,7 @@ public class EdificioService {
             throw new EmptyAttribute("La città dell'edificio è vuota");
         }
 
-        boolean esiste = edificioRepository.existsByNomeAndCitta(edificio.getNome(), edificio.getCitta(), edificio.getIndirizzo());
+        boolean esiste = edificioRepository.existsByNomeAndCittaAndIndirizzo(edificio.getNome(), edificio.getCitta(), edificio.getIndirizzo());
         if (esiste) {
             System.out.println("Edificio '" + edificio.getNome() + "' già presente nel database");
             return;
@@ -44,10 +43,7 @@ public class EdificioService {
         System.out.println("Edificio '" + edificio.getNome() + "' salvato con successo!");
     }
 
-    public Optional<Edificio> findById(UUID id) {
-        if (id == null) {
-            throw new EmptyAttribute("L'ID dell'edificio è nullo");
-        }
-        return this.edificioRepository.findById(id);
+    public Edificio findById(UUID id) {
+        return this.edificioRepository.findById(id).orElseThrow(() -> new NotFoundException("Edificio con ID " + id + " non trovato"));
     }
 }
